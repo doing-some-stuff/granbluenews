@@ -38,7 +38,7 @@ try:
         
         if entryno>60:
           with open(sentlogs,"w") as ff:
-            newlog=''.join(sentt[50:])
+            newlog=''.join(sentt[30:])
             ff.write(newlog)
           with open(errlogs,"w") as ff:
             pass
