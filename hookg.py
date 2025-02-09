@@ -29,7 +29,8 @@ try:
       entryno=len(sentt)
     try:
       for entry in feed.entries:
-        if f"{entry.split('//')[-1]}\n" in sentt:
+        text=entry.link
+        if f"{text.split('//')[-1]}\n" in sentt:
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
