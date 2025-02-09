@@ -31,12 +31,13 @@ try:
     try:
       for entry in reversed(feed.entries):
         text=entry.link
+        with open("./logs/temp.log","+a") as ff:
+                  ff.write(f"sending webhook: {text}")
+        
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
-        with open("./logs/temp.log","+a") as ff:
-                  ff.write(f"sending webhook: {text}")
         #webhook.execute()
         if entryno>60:
           with open(sentlogs,"w") as ff:
