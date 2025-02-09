@@ -35,7 +35,7 @@ try:
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
         text=entry.link
-        with open("./logs/temp.log","+a) as ff:
+        with open("./logs/temp.log","+a") as ff:
                   ff.write(f"Writing {text}\n")
         webhook=DiscordWebhook(url=hooklink,content=text)
         webhook.execute()
