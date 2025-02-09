@@ -32,10 +32,10 @@ try:
     try:
       for entry in feed.entries:
         text=entry.link 
-        with open("./logs/temp.log","+a") as ff:
-                  ff.write(f"Writing {text}\n")
-        
         if f"{text.split('/')[-1]}\n" in sentt:
+          with open("./logs/temp.log","+a") as ff:
+                  ff.write(f"Writing {text.split('/')[-1]} {text}\n")
+        
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
