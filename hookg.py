@@ -24,34 +24,34 @@ except Exception as ee:
 try:
   feed = feedparser.parse(url)
   if feed.status == 200:
-	with open(sentlogs,"+r") as ff:
-		sentt=ff.readlines()
+    with open(sentlogs,"+r") as ff:
+      sentt=ff.readlines()
+      entryno=len(sentt)
     try:
-    	for entry in feed.entries:
-    		if f"{entry.split("/")[-1]}\n" in sentt:
-    			continue
-    		text=entry.link
-    		webhook=DiscordWebhook(url=hooklink,content=text)
-    		webhook.execute()
-    		if entrno>60:
-    			with open(sentlogs,"w") as ff:
-    				newsshow=''.join(sentshows[8:])
-    				ff.write(newsshow)
-    		    with open(errlogs,"w") as ff:
-    		    	pass
-    	    with open(sentlogs,"a+") as ff:
-    	    	ff.write(f"{text.split("/")[-1]}\n")
-
+      for entry in feed.entries:
+        if f"{entry.split('//')[-1]}\n" in sentt:
+          continue
+        text=entry.link
+        webhook=DiscordWebhook(url=hooklink,content=text)
+        webhook.execute()
+        if entryno>60:
+          with open(sentlogs,"w") as ff:
+            newlog=''.join(sentt[50:])
+            ff.write(newlog)
+          with open(errlogs,"w") as ff:
+            pass
+        with open(sentlogs,"a+") as ff:
+          ff.write(f"{text.split('//')[-1]}\n")      
     except Exception as e:
-    	with open(errlogs,"a+") as ff:
-    		err=f"{datetime.datetime.today()}||WebhookErr: {e}\n"
-    		ff.write(err)
+      with open(errlogs,"a+") as ff:
+        err=f"{datetime.datetime.today()}||WebhookErr: {e}\n"
+        ff.write(err)
   else:
-  	with open(errlogs,"a+") as ff:
-  		err=f"{datetime.datetime.today()}||Failed to get RSS feed. Status code: {feed.status}"
-  		ff.write(err)
+    with open(errlogs,"a+") as ff:
+      err=f"{datetime.datetime.today()}||Failed to get RSS feed. Status code: {feed.status}"
+      ff.write(err)
 
 except Exception as e:
-	with open(errlogs,"a+") as ff:
-		err=f"{datetime.datetime.today()}||FeedErr: {e}\n"
-		ff.write(err)
+  with open(errlogs,"a+") as ff:
+    err=f"{datetime.datetime.today()}||FeedErr: {e}\n"
+    ff.write(err)
