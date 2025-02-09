@@ -5,7 +5,8 @@ import datetime
 
 sentlogs="./logs/content.log"
 errlogs="./logs/err.log"
-
+with open("./logs/temp.log","w") as ff:
+  pass
 if not os.path.exists(sentlogs):
   with open(sentlogs,"w") as ff:
     pass
@@ -34,7 +35,9 @@ try:
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
-        webhook.execute()
+        with open("./logs/temp.log","+a") as ff:
+                  ff.write(f"sending webhook: {text}")
+        #webhook.execute()
         if entryno>60:
           with open(sentlogs,"w") as ff:
             newlog=''.join(sentt[50:])
