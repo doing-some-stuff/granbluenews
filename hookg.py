@@ -32,7 +32,7 @@ try:
       for entry in reversed(feed.entries):
         text=entry.link
         with open("./logs/temp.log","+a") as ff:
-                  ff.write(f"sending webhook: {text}")
+                  ff.write(f"sending webhook: {text}\n")
         
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
