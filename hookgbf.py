@@ -28,7 +28,7 @@ try:
       sentt=ff.readlines()
       entryno=len(sentt)
     try:
-      for entry in reversed(feed.entries):
+      for entry in feed.entries:
         text=entry.link        
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
