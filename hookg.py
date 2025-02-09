@@ -28,9 +28,9 @@ try:
       sentt=ff.readlines()
       entryno=len(sentt)
     try:
-      for entry in feed.entries:
+      for entry in reversed(feed.entries):
         text=entry.link
-        if f"{text.split('//')[-1]}\n" in sentt:
+        if f"{text.split('/')[-1]}\n" in sentt:
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
@@ -42,7 +42,7 @@ try:
           with open(errlogs,"w") as ff:
             pass
         with open(sentlogs,"a+") as ff:
-          ff.write(f"{text.split('//')[-1]}\n")      
+          ff.write(f"{text.split('/')[-1]}\n")      
     except Exception as e:
       with open(errlogs,"a+") as ff:
         err=f"{datetime.datetime.today()}||WebhookErr: {e}\n"
