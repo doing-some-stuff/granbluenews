@@ -1,6 +1,7 @@
 import feedparser
 from discord_webhook import DiscordWebhook,DiscordEmbed
 import os
+import datetime
 
 sentlogs="./logs/content.log"
 errlogs="./logs/err.log"
