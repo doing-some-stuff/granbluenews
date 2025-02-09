@@ -1,12 +1,11 @@
 import feedparser
 from discord_webhook import DiscordWebhook,DiscordEmbed
 import os
+from time import sleep
 import datetime
 
 sentlogs="./logs/content.log"
 errlogs="./logs/err.log"
-with open("./logs/temp.log","w") as ff:
-  pass
 if not os.path.exists(sentlogs):
   with open(sentlogs,"w") as ff:
     pass
@@ -30,15 +29,12 @@ try:
       entryno=len(sentt)
     try:
       for entry in reversed(feed.entries):
-        text=entry.link
-        with open("./logs/temp.log","+a") as ff:
-                  ff.write(f"sending webhook: {text}\n")
-        
+        text=entry.link        
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
         text=entry.link
         webhook=DiscordWebhook(url=hooklink,content=text)
-        #webhook.execute()
+        webhook.execute()
         if entryno>60:
           with open(sentlogs,"w") as ff:
             newlog=''.join(sentt[50:])
@@ -46,7 +42,7 @@ try:
           with open(errlogs,"w") as ff:
             pass
         with open(sentlogs,"a+") as ff:
-          ff.write(f"{text.split('/')[-1]}\n")      
+          ff.write(f"{text.split('/')[-1]}\n") 
     except Exception as e:
       with open(errlogs,"a+") as ff:
         err=f"{datetime.datetime.today()}||WebhookErr: {e}\n"
