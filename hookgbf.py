@@ -6,6 +6,8 @@ import datetime
 sentlogs="./logs/content.log"
 errlogs="./logs/err.log"
 
+with open("./logs/temp.log","w") as ff:
+  pass
 if not os.path.exists(sentlogs):
   with open(sentlogs,"w") as ff:
     pass
@@ -33,6 +35,8 @@ try:
         if f"{text.split('/')[-1]}\n" in sentt:
           continue
         text=entry.link
+        with open("./logs/temp.log","+a) as ff:
+                  ff.write(f"Writing {text}\n")
         webhook=DiscordWebhook(url=hooklink,content=text)
         webhook.execute()
         
