@@ -38,9 +38,9 @@ try:
         webhook=DiscordWebhook(url=hooklink,content=text)
         webhook.execute()
         
-        if entryno>60:
+        if entryno>200:
           with open(sentlogs,"w") as ff:
-            newlog=''.join(sentt[30:])
+            newlog=''.join(sentt[100:])
             ff.write(newlog)
           with open(errlogs,"w") as ff:
             pass
